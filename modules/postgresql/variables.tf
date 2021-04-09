@@ -43,6 +43,12 @@ variable "kubernetes_namespace" {
   default     = null
 }
 
+variable "kubernetes_secret_name" {
+  description = "The name of the Kubernetes secret to create"
+  type        = string
+  default     = null
+}
+
 # Network variables
 variable vnet_name_prefix {
   description = "Vnet name prefix where the nodes and pods will be deployed"

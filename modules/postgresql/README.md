@@ -115,6 +115,7 @@ For instructions on how to connect securely from a local machine, please see int
 | geo_redundant_backup_enabled | Whether to enable geo-redundant server backup | bool | true | no |
 | kubernetes_create_secret | Whether to create a Kubernetes secret | bool | true | no |
 | kubernetes_namespace | The namespace where a Kubernetes secret should be created | string | var.app_name | no |
+| kubernetes_secret_name | The name of the Kubernetes secret to create | string | Generated | no |
 | landing_zone | The landing zone name, e.g. 'dev-001' | string | N/A | yes |
 | location | Azure region where the cluster should be deployed | string | Norway East | no |
 | postgresql_server_name | Specifies the name of the PostgreSQL Server | string | Generated | no |
@@ -138,6 +139,9 @@ For instructions on how to connect securely from a local machine, please see int
 | server_fqdn | The server instance host |
 
 ### Example Kubernetes secret
+By default, secret names are prefixed with the application name specified in `var.app_name`, i.e. `<appname>-psql-credentials`. 
+
+If `var.app_name` = `petshop`, it would produce a secret named `petshop-psql-credentials`.
 ```
 apiVersion: v1
 data:

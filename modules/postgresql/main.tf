@@ -1,7 +1,7 @@
 locals {
   postgresql_server_name = var.postgresql_server_name != null ? var.postgresql_server_name : "psql-${var.app_name}-${var.environment}"
   kubernetes_namespace   = var.kubernetes_namespace != null ? var.kubernetes_namespace : var.app_name
-  kubernetes_secret_name = var.app_name != null ? "${var.app_name}-psql-credentials" : "psql-credentials"
+  kubernetes_secret_name = var.kubernetes_secret_name != null ? var.kubernetes_secret_name : "${var.app_name}-psql-credentials"
 
   grants_t = flatten(
     [for role in var.database_roles :
@@ -40,6 +40,10 @@ resource "azurerm_postgresql_server" "main" {
   ssl_minimal_tls_version_enforced = "TLS1_2"
   public_network_access_enabled    = var.public_network_access_enabled
   tags                             = var.tags
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Generate admin role password
@@ -65,6 +69,10 @@ resource "azurerm_postgresql_database" "databases" {
   server_name         = azurerm_postgresql_server.main.name
   charset             = var.db_charset
   collation           = var.db_collation
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Provision any custom configuration
@@ -151,6 +159,10 @@ resource "postgresql_schema" "schemas" {
     azurerm_postgresql_server.main,
     azurerm_postgresql_database.databases
   ]
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Create grants for roles
