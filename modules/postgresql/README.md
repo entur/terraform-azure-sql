@@ -111,6 +111,7 @@ For instructions on how to connect securely from a local machine, please see int
 | database_roles | Map of database roles and grants to create | map | N/A | yes |
 | db_charset | Specifies the charset for databases | string | UTF8 | no |
 | db_collation | Specifies the collation for databases | string | nb-NO | no |
+| drop_cascade | Whether to drop all the objects that are contained in a schema on deletion | bool | false | no |
 | environment | The environment name, e.g. 'dev' | string | N/A | yes |
 | geo_redundant_backup_enabled | Whether to enable geo-redundant server backup | bool | true | no |
 | kubernetes_create_secret | Whether to create a Kubernetes secret | bool | true | no |

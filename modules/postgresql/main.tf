@@ -153,8 +153,10 @@ resource "postgresql_role" "roles" {
 resource "postgresql_schema" "schemas" {
   for_each      = local.grants
   name          = each.value.schema
+  database      = each.value.database
+  drop_cascade  = var.drop_cascade
   if_not_exists = true
-
+  
   depends_on = [
     azurerm_postgresql_server.main,
     azurerm_postgresql_database.databases

@@ -127,6 +127,12 @@ variable "public_network_access_enabled" {
   default     = false
 }
 
+variable "drop_cascade" {
+  description = "Whether to drop all the objects that are contained in a schema on deletion."
+  type        = bool
+  default     = false
+}
+
 variable "server_configurations" {
   description = "A map of PostgreSQL configurations to enable."
   type        = map(string)
