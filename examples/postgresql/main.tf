@@ -9,10 +9,9 @@ module "postgresql" {
   location            = var.location
   tags                = var.tags
 
-  app_name                     = var.app_name
-  environment                  = var.environment
-  landing_zone                 = var.landing_zone
-  kubernetes_secret_namespaces = [var.app_name]
+  app_name     = var.app_name
+  environment  = var.environment
+  landing_zone = var.landing_zone
 
   server_version = "11"
   sku_name       = "GP_Gen5_2"

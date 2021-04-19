@@ -1,6 +1,11 @@
 locals {
-  postgresql_server_name = var.postgresql_server_name != null ? var.postgresql_server_name : "psql-${var.app_name}-${var.environment}"
+  # If kubernetes_create_secret == false, set var.kubernetes_namespaces as empty list.
+  # If kubernetes_create_secret == true, use var.kubernetes_namespaces if set.
+  # If kubernetes_create_secret == true but var.kubernetes_namespaces is not set (default), set it to a single entry list containing var.app_name.
+  kubernetes_namespaces = var.kubernetes_create_secret == false ? [] : length(var.kubernetes_namespaces) > 0 ? var.kubernetes_namespaces : [ var.app_name ]
+  
   kubernetes_secret_name = var.kubernetes_secret_name != null ? var.kubernetes_secret_name : "${var.app_name}-psql-credentials"
+  postgresql_server_name = var.postgresql_server_name != null ? var.postgresql_server_name : "psql-${var.app_name}-${var.environment}"
 
   grants_t = flatten(
     [for role in var.database_roles :
@@ -116,7 +121,7 @@ resource "azurerm_private_dns_a_record" "privatelink" {
 
 
 resource "kubernetes_secret" "db_credentials" {
-  for_each            = { for ns in var.kubernetes_secret_namespaces: ns => ns }
+  for_each            = { for ns in local.kubernetes_namespaces: ns => ns }
   
   metadata {
     name      = local.kubernetes_secret_name

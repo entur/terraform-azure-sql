@@ -30,7 +30,13 @@ variable "tags" {
   type        = map
 }
 
-variable "kubernetes_secret_namespaces" {
+variable "kubernetes_create_secret" {
+  description = "Whether to create a Kubernetes secret"
+  type        = bool
+  default     = true
+}
+
+variable "kubernetes_namespaces" {
   description = "The namespaces where a Kubernetes secret should be created"
   type        = list(string)
   default     = []
