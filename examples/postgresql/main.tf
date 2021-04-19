@@ -1,4 +1,4 @@
-provider azurerm {
+provider "azurerm" {
   features {}
 }
 
@@ -9,9 +9,10 @@ module "postgresql" {
   location            = var.location
   tags                = var.tags
 
-  app_name     = var.app_name
-  environment  = var.environment
-  landing_zone = var.landing_zone
+  app_name                     = var.app_name
+  environment                  = var.environment
+  landing_zone                 = var.landing_zone
+  kubernetes_secret_namespaces = [var.app_name]
 
   server_version = "11"
   sku_name       = "GP_Gen5_2"
