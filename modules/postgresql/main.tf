@@ -119,7 +119,7 @@ resource "azurerm_private_dns_a_record" "privatelink" {
   records             = azurerm_private_endpoint.aks.custom_dns_configs[0].ip_addresses
 }
 
-
+# Provision db credentials and connection information in Kubernetes cluster
 resource "kubernetes_secret" "db_credentials" {
   for_each = { for ns in local.kubernetes_namespaces : ns => ns }
 

@@ -115,7 +115,7 @@ For instructions on how to connect securely from a local machine, please see int
 | environment | The environment name, e.g. 'dev' | string | N/A | yes |
 | geo_redundant_backup_enabled | Whether to enable geo-redundant server backup | bool | true | no |
 | kubernetes_create_secret | Whether to create Kubernetes secret(s) | bool | true | no |
-| kubernetes_namespaces | The namespace(s) where Kubernetes secret(s) should be created | string | [] | no |
+| kubernetes_namespaces | The namespace(s) where Kubernetes secret(s) should be created | list(string) | [] | no |
 | kubernetes_secret_name | The name of the Kubernetes secret(s) to create | string | Generated | no |
 | landing_zone | The landing zone name, e.g. 'dev-001' | string | N/A | yes |
 | location | Azure region where the cluster should be deployed | string | Norway East | no |
