@@ -1,6 +1,5 @@
 locals {
   postgresql_server_name = var.postgresql_server_name != null ? var.postgresql_server_name : "psql-${var.app_name}-${var.environment}"
-  kubernetes_namespace   = var.kubernetes_namespace != null ? var.kubernetes_namespace : var.app_name
   kubernetes_secret_name = var.kubernetes_secret_name != null ? var.kubernetes_secret_name : "${var.app_name}-psql-credentials"
 
   grants_t = flatten(
@@ -115,24 +114,9 @@ resource "azurerm_private_dns_a_record" "privatelink" {
   records             = azurerm_private_endpoint.aks.custom_dns_configs[0].ip_addresses
 }
 
-# Provision db credentials and connection information in Kubernetes cluster
+
 resource "kubernetes_secret" "db_credentials" {
-  count = var.kubernetes_create_secret == true ? 1 : 0
-  metadata {
-    name      = local.kubernetes_secret_name
-    namespace = local.kubernetes_namespace
-    labels    = var.tags
-  }
-
-  data = {
-    PGUSER     = "${postgresql_role.roles["application"].name}@${azurerm_postgresql_server.main.name}"
-    PGPASSWORD = postgresql_role.roles["application"].password
-    PGHOST     = azurerm_private_dns_a_record.privatelink.fqdn
-  }
-}
-
-resource "kubernetes_secret" "share_db_credentials" {
-  for_each            = { for ns in var.share_to_kubernetes_namespaces: ns => ns }
+  for_each            = { for ns in var.kubernetes_secret_namespaces: ns => ns }
   
   metadata {
     name      = local.kubernetes_secret_name
