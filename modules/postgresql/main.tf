@@ -131,6 +131,22 @@ resource "kubernetes_secret" "db_credentials" {
   }
 }
 
+resource "kubernetes_secret" "share_db_credentials" {
+  for_each            = { for ns in var.share_to_kubernetes_namespaces: ns => ns }
+  
+  metadata {
+    name      = local.kubernetes_secret_name
+    namespace = each.value
+    labels    = var.tags
+  }
+
+  data = {
+    PGUSER     = "${postgresql_role.roles["application"].name}@${azurerm_postgresql_server.main.name}"
+    PGPASSWORD = postgresql_role.roles["application"].password
+    PGHOST     = azurerm_private_dns_a_record.privatelink.fqdn
+  }
+}
+
 # Create roles
 resource "postgresql_role" "roles" {
   for_each            = var.database_roles

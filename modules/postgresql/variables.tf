@@ -43,6 +43,12 @@ variable "kubernetes_namespace" {
   default     = null
 }
 
+variable "share_to_kubernetes_namespaces" {
+  description = "Share to a list of namespaces"
+  type        = list(string)
+  default     = []
+}
+
 variable "kubernetes_secret_name" {
   description = "The name of the Kubernetes secret to create"
   type        = string
