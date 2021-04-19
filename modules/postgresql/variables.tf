@@ -30,6 +30,7 @@ variable "tags" {
   type        = map
 }
 
+# Kubernetes variables
 variable "kubernetes_create_secret" {
   description = "Whether to create a Kubernetes secret"
   type        = bool

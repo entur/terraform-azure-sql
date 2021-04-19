@@ -2,8 +2,8 @@ locals {
   # If kubernetes_create_secret == false, set var.kubernetes_namespaces as empty list.
   # If kubernetes_create_secret == true, use var.kubernetes_namespaces if set.
   # If kubernetes_create_secret == true but var.kubernetes_namespaces is not set (default), set it to a single entry list containing var.app_name.
-  kubernetes_namespaces = var.kubernetes_create_secret == false ? [] : length(var.kubernetes_namespaces) > 0 ? var.kubernetes_namespaces : [ var.app_name ]
-  
+  kubernetes_namespaces = var.kubernetes_create_secret == false ? [] : length(var.kubernetes_namespaces) > 0 ? var.kubernetes_namespaces : [var.app_name]
+
   kubernetes_secret_name = var.kubernetes_secret_name != null ? var.kubernetes_secret_name : "${var.app_name}-psql-credentials"
   postgresql_server_name = var.postgresql_server_name != null ? var.postgresql_server_name : "psql-${var.app_name}-${var.environment}"
 
@@ -67,7 +67,7 @@ resource "random_password" "roles" {
 
 # Provision databases
 resource "azurerm_postgresql_database" "databases" {
-  for_each            = { for db in var.databases: db => db }
+  for_each            = { for db in var.databases : db => db }
   name                = each.value
   resource_group_name = azurerm_postgresql_server.main.resource_group_name
   server_name         = azurerm_postgresql_server.main.name
@@ -121,8 +121,8 @@ resource "azurerm_private_dns_a_record" "privatelink" {
 
 
 resource "kubernetes_secret" "db_credentials" {
-  for_each            = { for ns in local.kubernetes_namespaces: ns => ns }
-  
+  for_each = { for ns in local.kubernetes_namespaces : ns => ns }
+
   metadata {
     name      = local.kubernetes_secret_name
     namespace = each.value
@@ -161,7 +161,7 @@ resource "postgresql_schema" "schemas" {
   database      = each.value.database
   drop_cascade  = var.drop_cascade
   if_not_exists = true
-  
+
   depends_on = [
     azurerm_postgresql_server.main,
     azurerm_postgresql_database.databases

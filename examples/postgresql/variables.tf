@@ -34,7 +34,7 @@ variable "databases" {
 }
 
 variable "database_roles" {
-  type    = map
+  type = map
   default = {
     application = {
       name              = "appuser"
