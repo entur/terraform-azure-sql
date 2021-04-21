@@ -37,10 +37,10 @@ variable "kubernetes_create_secret" {
   default     = true
 }
 
-variable "kubernetes_namespace" {
-  description = "The namespace where a Kubernetes secret should be created"
-  type        = string
-  default     = null
+variable "kubernetes_namespaces" {
+  description = "The namespaces where a Kubernetes secret should be created"
+  type        = list(string)
+  default     = []
 }
 
 variable "kubernetes_secret_name" {
