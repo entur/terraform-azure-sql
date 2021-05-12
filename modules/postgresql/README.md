@@ -113,10 +113,10 @@ For instructions on how to connect securely from a local machine, please see int
 | db_collation | Specifies the collation for databases | string | nb-NO | no |
 | drop_cascade | Whether to drop all the objects that are contained in a schema on deletion | bool | false | no |
 | environment | The environment name, e.g. 'dev' | string | N/A | yes |
-| geo_redundant_backup_enabled | Whether to enable geo-redundant server backup (Basic SKU will not work while this is `true`) | bool | true | no |
-| kubernetes_create_secret | Whether to create a Kubernetes secret | bool | true | no |
-| kubernetes_namespace | The namespace where a Kubernetes secret should be created | string | var.app_name | no |
-| kubernetes_secret_name | The name of the Kubernetes secret to create | string | Generated | no |
+| geo_redundant_backup_enabled | Whether to enable geo-redundant server backup | bool | true | no |
+| kubernetes_create_secret | Whether to create Kubernetes secret(s) | bool | true | no |
+| kubernetes_namespaces | The namespace(s) where Kubernetes secret(s) should be created | list(string) | [] | no |
+| kubernetes_secret_name | The name of the Kubernetes secret(s) to create | string | Generated | no |
 | landing_zone | The landing zone name, e.g. 'dev-001' | string | N/A | yes |
 | location | Azure region where the cluster should be deployed | string | Norway East | no |
 | postgresql_server_name | Specifies the name of the PostgreSQL Server | string | Generated | no |
