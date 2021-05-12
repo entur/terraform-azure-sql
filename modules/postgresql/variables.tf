@@ -76,12 +76,12 @@ variable "postgresql_server_name" {
 }
 
 variable "sku_name" {
-  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8)."
+  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. GP_Gen4_2, GP_Gen5_4). If you want to use Basic, you need to disable `geo_redundant_backup_enabled`"
   type        = string
 }
 
 variable "storage_mb" {
-  description = "Max storage allowed for a server. Possible values are between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU and between 5120 MB(5GB) and 4194304 MB(4TB) for General Purpose/Memory Optimized SKUs."
+  description = "Max storage allowed for a server. Possible values are between 5120 MB(5GB) and 4194304 MB(4TB) for General Purpose/Memory Optimized SKUs, and between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU."
   type        = number
   default     = 5120
 }
