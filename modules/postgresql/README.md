@@ -98,6 +98,8 @@ Public network access is denied by default, meaning the only way to connect to t
 
 For instructions on how to connect securely from a local machine, please see internal Entur instructions.
 
+## Database instance sizing
+Basic (B) tier VM sizes are not supported (e.g. B_Gen4_1) as they lack support for private endpoint connections and geo-redundant backups.
 
 ## Inputs
 
@@ -123,7 +125,7 @@ For instructions on how to connect securely from a local machine, please see int
 | public_network_access_enabled | Whether to enable public network access | bool | false | no |
 | server_configurations | PostgreSQL configuration parameters | map(string) | N/A | no |
 | server_version | Specifies the version of PostgreSQL to use (e.g. "11")| string | N/A | yes |
-| sku_name | Specifies the SKU name for this PostgreSQL server (e.g. GP_Gen5_2) | string | N/A | yes |
+| sku_name | Specifies the SKU name for this PostgreSQL server ([more info](#database-instance-sizing)) | string | N/A | yes |
 | storage_mb | Max storage allowed for a server in megabytes (e.g. 5120) | number | N/A | yes |
 | tags | Tags to apply to created resources | map | N/A | yes |
 
