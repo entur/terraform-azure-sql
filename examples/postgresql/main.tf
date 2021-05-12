@@ -3,8 +3,9 @@ provider "azurerm" {
 }
 
 module "postgresql" {
-  #source              = "github.com/entur/terraform-azure-sql//modules/postgresql?ref=v0.0.1"
-  source              = "../../modules/postgresql"
+  source              = "github.com/entur/terraform-azure-sql//modules/postgresql?ref=v0.0.4" # Releases: https://github.com/entur/terraform-azure-sql/releases
+  #source              = "../../modules/postgresql"
+
   resource_group_name = var.resource_group_name
   location            = var.location
   tags                = var.tags
