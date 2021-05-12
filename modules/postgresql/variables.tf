@@ -76,7 +76,7 @@ variable "postgresql_server_name" {
 }
 
 variable "sku_name" {
-  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8)."
+  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. GP_Gen5_8) - note: Basic tier (B) VMs are not supported."
   type        = string
 }
 
