@@ -7,6 +7,11 @@ output "administrator_login_password" {
   sensitive = true
 }
 
+output "roles" {
+  value = postgresql_role.roles
+  sensitive = true
+}
+
 output "application_login" {
   value = postgresql_role.roles["application"].name
 }
