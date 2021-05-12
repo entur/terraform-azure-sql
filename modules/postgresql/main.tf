@@ -119,6 +119,16 @@ resource "azurerm_private_dns_a_record" "privatelink" {
   records             = azurerm_private_endpoint.aks.custom_dns_configs[0].ip_addresses
 }
 
+# Give the DNS record a chance to propagate
+resource "time_sleep" "wait_for_dns" {
+  create_duration = "120s"
+
+  triggers = {
+    privatelink_name     = azurerm_private_dns_a_record.privatelink.name,
+    privatelink_records  = join(";", azurerm_private_dns_a_record.privatelink.records)
+  }
+}
+
 # Provision db credentials and connection information in Kubernetes cluster
 resource "kubernetes_secret" "db_credentials" {
   for_each = { for ns in local.kubernetes_namespaces : ns => ns }
@@ -150,7 +160,8 @@ resource "postgresql_role" "roles" {
   skip_reassign_owned = true
 
   depends_on = [
-    azurerm_postgresql_server.main
+    azurerm_postgresql_server.main,
+    time_sleep.wait_for_dns
   ]
 }
 
@@ -164,7 +175,8 @@ resource "postgresql_schema" "schemas" {
 
   depends_on = [
     azurerm_postgresql_server.main,
-    azurerm_postgresql_database.databases
+    azurerm_postgresql_database.databases,
+    time_sleep.wait_for_dns
   ]
 
   lifecycle {
@@ -185,6 +197,7 @@ resource "postgresql_grant" "roles" {
     azurerm_postgresql_server.main,
     azurerm_postgresql_database.databases,
     postgresql_role.roles,
-    postgresql_schema.schemas
+    postgresql_schema.schemas,
+    time_sleep.wait_for_dns
   ]
 }
