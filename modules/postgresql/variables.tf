@@ -37,10 +37,10 @@ variable "kubernetes_create_secret" {
   default     = true
 }
 
-variable "kubernetes_namespace" {
-  description = "The namespace where a Kubernetes secret should be created"
-  type        = string
-  default     = null
+variable "kubernetes_namespaces" {
+  description = "The namespaces where a Kubernetes secret should be created"
+  type        = list(string)
+  default     = []
 }
 
 variable "kubernetes_secret_name" {
@@ -50,13 +50,13 @@ variable "kubernetes_secret_name" {
 }
 
 # Network variables
-variable vnet_name_prefix {
+variable "vnet_name_prefix" {
   description = "Vnet name prefix where the nodes and pods will be deployed"
   type        = string
   default     = "vnet"
 }
 
-variable aks_connections_subnet_name_prefix {
+variable "aks_connections_subnet_name_prefix" {
   description = "Subnet name prefix of subnets where Azure private endpoint connections will be created"
   type        = string
   default     = "snet-aks-connections"
@@ -76,7 +76,7 @@ variable "postgresql_server_name" {
 }
 
 variable "sku_name" {
-  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. B_Gen4_1, GP_Gen5_8)."
+  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. GP_Gen5_8) - note: Basic tier (B) VMs are not supported."
   type        = string
 }
 

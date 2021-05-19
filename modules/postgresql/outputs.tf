@@ -7,11 +7,6 @@ output "administrator_login_password" {
   sensitive = true
 }
 
-output "roles" {
-  value = postgresql_role.roles
-  sensitive = true
-}
-
 output "application_login" {
   value = postgresql_role.roles["application"].name
 }
@@ -21,8 +16,13 @@ output "application_login_password" {
   sensitive = true
 }
 
-output custom_dns_configs {
+output "custom_dns_configs" {
   value = azurerm_private_endpoint.aks.custom_dns_configs
+}
+
+output "roles" {
+  value     = postgresql_role.roles
+  sensitive = true
 }
 
 output "server_name" {

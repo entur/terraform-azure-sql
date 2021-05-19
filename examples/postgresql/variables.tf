@@ -24,7 +24,7 @@ variable "resource_group_name" {
 }
 
 variable "tags" {
-  type    = map
+  type    = map(any)
   default = {}
 }
 
@@ -34,7 +34,7 @@ variable "databases" {
 }
 
 variable "database_roles" {
-  type    = map
+  type = map(any)
   default = {
     application = {
       name              = "appuser"

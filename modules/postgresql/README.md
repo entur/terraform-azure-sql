@@ -136,6 +136,7 @@ For instructions on how to connect securely from a local machine, please see int
 | application_login | The application role login |
 | application_login_password | The application role password |
 | custom_dns_configs | Custom DNS configurations as exported by the private endpoint resource |
+| roles | All PostgreSQL roles provisioned by this module |
 | server_name | The server instance name |
 | server_fqdn | The server instance host |
 
