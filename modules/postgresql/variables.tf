@@ -27,7 +27,7 @@ variable "landing_zone" {
 
 variable "tags" {
   description = "Tags to attach to resources"
-  type        = map
+  type        = map(any)
 }
 
 # Kubernetes variables
@@ -154,7 +154,7 @@ variable "databases" {
 # Note: This map requires an entry with the 'application' key: it is used for provisioning k8s credentials etc.
 variable "database_roles" {
   description = "Map of database roles and grants."
-  type        = map
+  type        = map(any)
   default = {
     application = {
       name              = "appuser"
