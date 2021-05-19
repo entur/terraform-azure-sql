@@ -24,7 +24,7 @@ variable "resource_group_name" {
 }
 
 variable "tags" {
-  type    = map
+  type    = map(any)
   default = {}
 }
 
@@ -34,7 +34,7 @@ variable "databases" {
 }
 
 variable "database_roles" {
-  type = map
+  type = map(any)
   default = {
     application = {
       name              = "appuser"
@@ -43,25 +43,44 @@ variable "database_roles" {
       grants = [
         {
           database    = "cats"
-          schema      = "public"
+          schema      = "cats"
           object_type = "database"
           privileges  = ["CONNECT"]
         },
         {
           database    = "cats"
-          schema      = "public"
+          schema      = "cats"
           object_type = "schema"
           privileges  = ["USAGE", "CREATE"]
         },
         {
           database    = "dogs"
-          schema      = "public"
+          schema      = "dogs"
           object_type = "database"
           privileges  = ["CONNECT"]
         },
         {
           database    = "dogs"
-          schema      = "public"
+          schema      = "dogs"
+          object_type = "schema"
+          privileges  = ["USAGE", "CREATE"]
+        }
+      ]
+    }
+    additional_role = {
+      name              = "gorilla"
+      password_override = null
+      replication       = false
+      grants = [
+        {
+          database    = "bananas"
+          schema      = "bananas"
+          object_type = "database"
+          privileges  = ["CONNECT"]
+        },
+        {
+          database    = "bananas"
+          schema      = "bananas"
           object_type = "schema"
           privileges  = ["USAGE", "CREATE"]
         }

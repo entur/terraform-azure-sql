@@ -138,6 +138,7 @@ Basic (B) tier VM sizes are not supported (e.g. B_Gen4_1) as they lack support f
 | application_login | The application role login |
 | application_login_password | The application role password |
 | custom_dns_configs | Custom DNS configurations as exported by the private endpoint resource |
+| roles | All PostgreSQL roles provisioned by this module |
 | server_name | The server instance name |
 | server_fqdn | The server instance host |
 

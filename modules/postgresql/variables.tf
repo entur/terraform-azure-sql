@@ -27,7 +27,7 @@ variable "landing_zone" {
 
 variable "tags" {
   description = "Tags to attach to resources"
-  type        = map
+  type        = map(any)
 }
 
 # Kubernetes variables
@@ -50,13 +50,13 @@ variable "kubernetes_secret_name" {
 }
 
 # Network variables
-variable vnet_name_prefix {
+variable "vnet_name_prefix" {
   description = "Vnet name prefix where the nodes and pods will be deployed"
   type        = string
   default     = "vnet"
 }
 
-variable aks_connections_subnet_name_prefix {
+variable "aks_connections_subnet_name_prefix" {
   description = "Subnet name prefix of subnets where Azure private endpoint connections will be created"
   type        = string
   default     = "snet-aks-connections"
