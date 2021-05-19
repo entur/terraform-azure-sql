@@ -98,6 +98,8 @@ Public network access is denied by default, meaning the only way to connect to t
 
 For instructions on how to connect securely from a local machine, please see internal Entur instructions.
 
+## Database instance sizing
+Basic (B) tier VM sizes are not supported (e.g. B_Gen4_1) as they lack support for private endpoint connections and geo-redundant backups.
 
 ## Inputs
 
@@ -114,16 +116,16 @@ For instructions on how to connect securely from a local machine, please see int
 | drop_cascade | Whether to drop all the objects that are contained in a schema on deletion | bool | false | no |
 | environment | The environment name, e.g. 'dev' | string | N/A | yes |
 | geo_redundant_backup_enabled | Whether to enable geo-redundant server backup | bool | true | no |
-| kubernetes_create_secret | Whether to create a Kubernetes secret | bool | true | no |
-| kubernetes_namespace | The namespace where a Kubernetes secret should be created | string | var.app_name | no |
-| kubernetes_secret_name | The name of the Kubernetes secret to create | string | Generated | no |
+| kubernetes_create_secret | Whether to create Kubernetes secret(s) | bool | true | no |
+| kubernetes_namespaces | The namespace(s) where Kubernetes secret(s) should be created | list(string) | [] | no |
+| kubernetes_secret_name | The name of the Kubernetes secret(s) to create | string | Generated | no |
 | landing_zone | The landing zone name, e.g. 'dev-001' | string | N/A | yes |
 | location | Azure region where the cluster should be deployed | string | Norway East | no |
 | postgresql_server_name | Specifies the name of the PostgreSQL Server | string | Generated | no |
 | public_network_access_enabled | Whether to enable public network access | bool | false | no |
 | server_configurations | PostgreSQL configuration parameters | map(string) | N/A | no |
 | server_version | Specifies the version of PostgreSQL to use (e.g. "11")| string | N/A | yes |
-| sku_name | Specifies the SKU name for this PostgreSQL server (e.g. GP_Gen5_2) | string | N/A | yes |
+| sku_name | Specifies the SKU name for this PostgreSQL server ([more info](#database-instance-sizing)) | string | N/A | yes |
 | storage_mb | Max storage allowed for a server in megabytes (e.g. 5120) | number | N/A | yes |
 | tags | Tags to apply to created resources | map | N/A | yes |
 
