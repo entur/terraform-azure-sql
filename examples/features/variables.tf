@@ -43,25 +43,44 @@ variable "database_roles" {
       grants = [
         {
           database    = "cats"
-          schema      = "public"
+          schema      = "cats"
           object_type = "database"
           privileges  = ["CONNECT"]
         },
         {
           database    = "cats"
-          schema      = "public"
+          schema      = "cats"
           object_type = "schema"
           privileges  = ["USAGE", "CREATE"]
         },
         {
           database    = "dogs"
-          schema      = "public"
+          schema      = "dogs"
           object_type = "database"
           privileges  = ["CONNECT"]
         },
         {
           database    = "dogs"
-          schema      = "public"
+          schema      = "dogs"
+          object_type = "schema"
+          privileges  = ["USAGE", "CREATE"]
+        }
+      ]
+    }
+    additional_role = {
+      name              = "gorilla"
+      password_override = null
+      replication       = false
+      grants = [
+        {
+          database    = "bananas"
+          schema      = "bananas"
+          object_type = "database"
+          privileges  = ["CONNECT"]
+        },
+        {
+          database    = "bananas"
+          schema      = "bananas"
           object_type = "schema"
           privileges  = ["USAGE", "CREATE"]
         }
