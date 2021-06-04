@@ -25,6 +25,10 @@ output "roles" {
   sensitive = true
 }
 
+output "server_id" {
+  value = azurerm_postgresql_server.main.id
+}
+
 output "server_name" {
   value = azurerm_postgresql_server.main.name
 }
