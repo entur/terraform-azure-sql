@@ -117,9 +117,6 @@ For instructions on how to connect securely from a local machine, please see int
 | kubernetes_secret_name | The name of the Kubernetes secret(s) to create | string | Generated | no |
 | landing_zone | The landing zone name, e.g. 'dev-001' | string | N/A | yes |
 | location | Azure region where the cluster should be deployed | string | Norway East | no |
-| vnet_name_prefix | Vnet name prefix where the nodes and pods will be deployed | string | vnet | yes |
-| network_resource_group_prefix | Name prefix of the network resource group | string | rg-networks | yes |
-| psql_connections_subnet_name_prefix | Subnet name prefix of subnets where Azure private endpoint connections will be created | string | snet-psqlflex-workloads | yes| 
 | postgresql_server_name | Specifies the name of the PostgreSQL Server | string | Generated | no |
 | public_network_access_enabled | Whether to enable public network access | bool | false | no |
 | server_configurations | PostgreSQL configuration parameters | map(string) | N/A | no |
