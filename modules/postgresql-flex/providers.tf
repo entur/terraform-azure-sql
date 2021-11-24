@@ -6,5 +6,4 @@ provider "postgresql" {
   sslmode          = "require"
   superuser        = false
   connect_timeout  = 15
-  expected_version = 12
 }
