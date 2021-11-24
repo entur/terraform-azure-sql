@@ -94,7 +94,7 @@ spring:
 The application container can communicate directly with the server instance using TLS, and it does not require a sidecar.
 
 ### Connecting from a local machine
-Public network access is denied by default, meaning the only way to connect to the database is through the private endpoint.
+Public network access is denied, meaning the only way to connect to the database is through the private endpoint.
 
 For instructions on how to connect securely from a local machine, please see internal Entur instructions.
 
@@ -104,7 +104,7 @@ For instructions on how to connect securely from a local machine, please see int
 |------|-------------|:----:|:-----:|:-----:|
 | administrator_login | The administrator login for the PostgreSQL server | string | pgsqladminlocal | no |
 | app_name | The name of the associated application | string | N/A | yes |
-| auto_grow_enabled | Whether to enable disk auto-grow | bool | false | no |
+| resource_group_name | The name of the resource group in which the PostgreSQL Server will be created.| string |-| yes|
 | backup_retention_days | Backup retention days for the server | number | 14 | no |
 | databases | List of databases to create | list(string) | N/A | yes |
 | database_roles | Map of database roles and grants to create | map | N/A | yes |
@@ -112,12 +112,14 @@ For instructions on how to connect securely from a local machine, please see int
 | db_collation | Specifies the collation for databases | string | nb-NO | no |
 | drop_cascade | Whether to drop all the objects that are contained in a schema on deletion | bool | false | no |
 | environment | The environment name, e.g. 'dev' | string | N/A | yes |
-| geo_redundant_backup_enabled | Whether to enable geo-redundant server backup | bool | true | no |
 | kubernetes_create_secret | Whether to create Kubernetes secret(s) | bool | true | no |
 | kubernetes_namespaces | The namespace(s) where Kubernetes secret(s) should be created | list(string) | [] | no |
 | kubernetes_secret_name | The name of the Kubernetes secret(s) to create | string | Generated | no |
 | landing_zone | The landing zone name, e.g. 'dev-001' | string | N/A | yes |
 | location | Azure region where the cluster should be deployed | string | Norway East | no |
+| vnet_name_prefix | Vnet name prefix where the nodes and pods will be deployed | string | vnet | yes |
+| network_resource_group_prefix | Name prefix of the network resource group | string | rg-networks | yes |
+| psql_connections_subnet_name_prefix | Subnet name prefix of subnets where Azure private endpoint connections will be created | string | snet-psqlflex-workloads | yes| 
 | postgresql_server_name | Specifies the name of the PostgreSQL Server | string | Generated | no |
 | public_network_access_enabled | Whether to enable public network access | bool | false | no |
 | server_configurations | PostgreSQL configuration parameters | map(string) | N/A | no |
@@ -137,6 +139,7 @@ For instructions on how to connect securely from a local machine, please see int
 | custom_dns_configs | Custom DNS configurations as exported by the private endpoint resource |
 | roles | All PostgreSQL roles provisioned by this module |
 | server_name | The server instance name |
+| server_id   | The server instance ID
 | server_fqdn | The server instance host |
 
 ### Example Kubernetes secret
