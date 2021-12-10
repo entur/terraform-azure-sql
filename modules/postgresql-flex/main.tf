@@ -60,10 +60,6 @@ resource "azurerm_postgresql_flexible_server" "main" {
   backup_retention_days  = var.backup_retention_days
   storage_mb             = var.storage_mb
   sku_name               = var.sku_name
-
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 # Generate role passwords
@@ -139,9 +135,6 @@ resource "postgresql_schema" "schemas" {
     azurerm_postgresql_flexible_server_database.databases
   ]
 
-  lifecycle {
-    prevent_destroy = true
-  }
 }
 
 # Create grants for roles
