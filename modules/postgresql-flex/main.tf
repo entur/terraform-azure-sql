@@ -62,7 +62,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
   sku_name               = var.sku_name
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
@@ -140,7 +140,7 @@ resource "postgresql_schema" "schemas" {
   ]
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
