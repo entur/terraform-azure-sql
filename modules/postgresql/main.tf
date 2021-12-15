@@ -180,7 +180,7 @@ resource "postgresql_schema" "schemas" {
   ]
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
