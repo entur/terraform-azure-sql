@@ -75,7 +75,7 @@ resource "azurerm_postgresql_database" "databases" {
   collation           = var.db_collation
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
