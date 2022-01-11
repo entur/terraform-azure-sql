@@ -102,7 +102,7 @@ resource "kubernetes_secret" "db_credentials" {
   }
 
   data = {
-    PGUSER     = "${postgresql_role.roles["application"].name}@${azurerm_postgresql_flexible_server.main.name}"
+    PGUSER     = "${postgresql_role.roles["application"].name}"
     PGPASSWORD = postgresql_role.roles["application"].password
     PGHOST     = azurerm_postgresql_flexible_server.main.fqdn
   }
