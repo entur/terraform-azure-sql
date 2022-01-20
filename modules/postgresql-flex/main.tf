@@ -60,7 +60,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
   backup_retention_days  = var.backup_retention_days
   storage_mb             = var.storage_mb
   sku_name               = var.sku_name
-
+  tags                   = var.tags
   lifecycle {
     prevent_destroy = true
   }
@@ -81,6 +81,9 @@ resource "azurerm_postgresql_flexible_server_database" "databases" {
   server_id = azurerm_postgresql_flexible_server.main.id
   charset   = var.db_charset
   collation = var.db_collation
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 # Provision any custom configuration

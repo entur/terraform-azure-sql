@@ -105,7 +105,7 @@ variable "db_charset" {
 variable "db_collation" {
   description = "Specifies the Collation for the PostgreSQL Database, which needs to be a valid PostgreSQL Collation. Note that Microsoft uses different notation - en-US instead of en_US. Changing this forces a new resource to be created."
   type        = string
-  default     = "en_US.utf8"
+  default     = "nb_NO.utf8"
 }
 
 variable "public_network_access_enabled" {
