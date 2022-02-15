@@ -163,3 +163,28 @@ resource "postgresql_grant" "roles" {
     postgresql_schema.schemas
   ]
 }
+
+resource "azurerm_monitor_diagnostic_setting" "psql_flex" {
+  name                       = azurerm_postgresql_flexible_server.main.name
+  target_resource_id         = azurerm_postgresql_flexible_server.main.id
+  log_analytics_workspace_id = var.log_analytics_workspace_id
+
+  log {
+    category = "PostgreSQLLogs"
+    enabled  = true
+
+    retention_policy {
+      enabled = true
+      days    = 30
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+
+    retention_policy {
+      enabled = true
+      days    = 30
+    }
+  }
+}

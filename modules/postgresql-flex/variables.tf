@@ -158,3 +158,8 @@ variable "database_roles" {
     }
   }
 }
+
+variable "log_analytics_workspace_id" {
+  description = "The id of log analytics workspace"
+  type        = string
+}
