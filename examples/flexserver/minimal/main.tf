@@ -1,5 +1,5 @@
 module "postgresql-flexserver" {
-  source = "github.com/entur/terraform-azure-sql//modules/postgresql-flex?ref=v0.0.6" # Releases: https://github.com/entur/terraform-azure-sql/releases
+  source = "github.com/entur/terraform-azure-sql//modules/postgresql-flex?ref=v0.0.8" # Releases: https://github.com/entur/terraform-azure-sql/releases
 
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -15,4 +15,5 @@ module "postgresql-flexserver" {
 
   databases      = var.databases
   database_roles = var.database_roles
+  workspace_id   = data.azurerm_log_analytics_workspace.system_ws.id
 }
