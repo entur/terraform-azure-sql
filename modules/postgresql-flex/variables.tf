@@ -158,3 +158,9 @@ variable "database_roles" {
     }
   }
 }
+
+variable "roles_list" {
+  description = "List of roles which will be granted to this new role"
+  type        = list
+  default     = ""
+}
