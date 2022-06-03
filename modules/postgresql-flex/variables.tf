@@ -147,6 +147,7 @@ variable "database_roles" {
       name              = "appuser"
       password_override = null # Password will be generated if left empty
       replication       = false
+      roles             = ["pg_monitor"] # Defines list of roles which will be granted to this new role.
       grants = [
         {
           database    = "application"
@@ -157,10 +158,4 @@ variable "database_roles" {
       ]
     }
   }
-}
-
-variable "roles_list" {
-  description = "List of roles which will be granted to this new role"
-  type        = list
-  default     = ""
 }

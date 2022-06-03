@@ -44,6 +44,7 @@ variable "database_roles" {
       name              = "appuser"
       password_override = null # Leave empty
       replication       = false
+      roles             = ["pg_monitor"]
       grants = [
         {
           database    = "mydatabase"
