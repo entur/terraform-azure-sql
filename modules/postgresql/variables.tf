@@ -160,6 +160,7 @@ variable "database_roles" {
       name              = "appuser"
       password_override = null # Password will be generated if left empty
       replication       = false
+      roles             = [] # Defines list of roles which will be granted to this new role.
       grants = [
         {
           database    = "application"

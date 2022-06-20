@@ -123,7 +123,7 @@ resource "postgresql_role" "roles" {
   inherit             = true
   password            = each.value.password_override != null ? each.value.password_override : random_password.roles[each.key].result
   skip_reassign_owned = true
-
+  roles               = each.value.roles
   depends_on = [
     azurerm_postgresql_flexible_server.main,
   ]
