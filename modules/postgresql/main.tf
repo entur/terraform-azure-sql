@@ -124,8 +124,8 @@ resource "time_sleep" "wait_for_dns" {
   create_duration = "120s"
 
   triggers = {
-    privatelink_name     = azurerm_private_dns_a_record.privatelink.name,
-    privatelink_records  = join(";", azurerm_private_dns_a_record.privatelink.records)
+    privatelink_name    = azurerm_private_dns_a_record.privatelink.name,
+    privatelink_records = join(";", azurerm_private_dns_a_record.privatelink.records)
   }
 }
 
