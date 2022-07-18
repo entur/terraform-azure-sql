@@ -1,12 +1,7 @@
-provider "azurerm" {
-  features {}
-}
-
-provider "kubernetes" {}
-
 module "postgresql" {
-  source              = "github.com/entur/terraform-azure-sql//modules/postgresql?ref=v0.0.5" # Releases: https://github.com/entur/terraform-azure-sql/releases
-  #source              = "../../../modules/postgresql"
+  source = "github.com/entur/terraform-azure-sql//modules/postgresql?ref=v0.0.5" # Releases: https://github.com/entur/terraform-azure-sql/releases (x-release-please-version)
+  # source = "../../../modules/postgresql"
+
   resource_group_name = var.resource_group_name
   location            = var.location
   tags                = var.tags
@@ -34,13 +29,13 @@ module "postgresql" {
 resource "kubernetes_secret" "example" {
   metadata {
     name      = "myapp-psql-credentials" # Secret name
-    namespace = "mynamespace" # Secret namespace
+    namespace = "mynamespace"            # Secret namespace
     labels    = var.tags
   }
 
   data = {
     PGUSER     = "${module.postgresql.roles["additional_role"].name}@${module.postgresql.server_name}" # Role key here
-    PGPASSWORD = module.postgresql.roles["additional_role"].password # Role key here
+    PGPASSWORD = module.postgresql.roles["additional_role"].password                                   # Role key here
     PGHOST     = module.postgresql.server_fqdn
   }
 }
