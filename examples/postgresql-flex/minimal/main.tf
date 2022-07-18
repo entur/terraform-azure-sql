@@ -1,5 +1,5 @@
 module "postgresql-flexserver" {
-  source = "github.com/entur/terraform-azure-sql//modules/postgresql-flex?ref=v0.0.6" # Releases: https://github.com/entur/terraform-azure-sql/releases
+  source = "github.com/entur/terraform-azure-sql//modules/postgresql-flex?ref=v0.0.6" # Releases: https://github.com/entur/terraform-azure-sql/releases (x-release-please-version)
 
   resource_group_name = var.resource_group_name
   location            = var.location
