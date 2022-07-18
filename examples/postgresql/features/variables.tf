@@ -40,6 +40,7 @@ variable "database_roles" {
       name              = "appuser"
       password_override = null
       replication       = false
+      roles             = []
       grants = [
         {
           database    = "cats"
