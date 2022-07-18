@@ -170,3 +170,92 @@ This can be fixed by first deleting the admin password from the Terraform state,
 `terraform state rm module.postgresql.random_password.admin`
 
 `terraform apply -target=module.postgresql.azurerm_postgresql_server.main`
+
+<!-- BEGIN_TF_DOCS -->
+## Requirements
+
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 2.53.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.0.3 |
+| <a name="requirement_postgresql"></a> [postgresql](#requirement\_postgresql) | 1.12.0 |
+
+## Providers
+
+| Name | Version |
+|------|---------|
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 2.53.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.0.3 |
+| <a name="provider_postgresql"></a> [postgresql](#provider\_postgresql) | 1.12.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+| <a name="provider_time"></a> [time](#provider\_time) | n/a |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurerm_postgresql_configuration.configs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_configuration) | resource |
+| [azurerm_postgresql_database.databases](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_database) | resource |
+| [azurerm_postgresql_server.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_server) | resource |
+| [azurerm_private_dns_a_record.privatelink](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
+| [azurerm_private_endpoint.aks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
+| [kubernetes_secret.db_credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
+| [postgresql_grant.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/grant) | resource |
+| [postgresql_role.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/role) | resource |
+| [postgresql_schema.schemas](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/schema) | resource |
+| [random_password.admin](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [random_password.roles](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [time_sleep.wait_for_dns](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
+| [azurerm_subnet.aks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subnet) | data source |
+
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_administrator_login"></a> [administrator\_login](#input\_administrator\_login) | The administrator login for the PostgreSQL Server. | `string` | `"pgsqladminlocal"` | no |
+| <a name="input_aks_connections_subnet_name_prefix"></a> [aks\_connections\_subnet\_name\_prefix](#input\_aks\_connections\_subnet\_name\_prefix) | Subnet name prefix of subnets where Azure private endpoint connections will be created | `string` | `"snet-aks-connections"` | no |
+| <a name="input_app_name"></a> [app\_name](#input\_app\_name) | The name of the associated application | `string` | n/a | yes |
+| <a name="input_auto_grow_enabled"></a> [auto\_grow\_enabled](#input\_auto\_grow\_enabled) | Enable/Disable auto-growing of the storage. | `bool` | `false` | no |
+| <a name="input_backup_retention_days"></a> [backup\_retention\_days](#input\_backup\_retention\_days) | Backup retention days for the server, supported values are between 7 and 35 days. | `number` | `14` | no |
+| <a name="input_database_roles"></a> [database\_roles](#input\_database\_roles) | Map of database roles and grants. | `map(any)` | <pre>{<br>  "application": {<br>    "grants": [<br>      {<br>        "database": "application",<br>        "object_type": "database",<br>        "privileges": [<br>          "CONNECT",<br>          "TEMPORARY"<br>        ],<br>        "schema": "public"<br>      }<br>    ],<br>    "name": "appuser",<br>    "password_override": null,<br>    "replication": false,<br>    "roles": []<br>  }<br>}</pre> | no |
+| <a name="input_databases"></a> [databases](#input\_databases) | The list of names of the PostgreSQL Database, which needs to be a valid PostgreSQL identifier. Changing this forces a new resource to be created. | `list(string)` | <pre>[<br>  "application"<br>]</pre> | no |
+| <a name="input_db_charset"></a> [db\_charset](#input\_db\_charset) | Specifies the Charset for the PostgreSQL Database, which needs to be a valid PostgreSQL Charset. Changing this forces a new resource to be created. | `string` | `"UTF8"` | no |
+| <a name="input_db_collation"></a> [db\_collation](#input\_db\_collation) | Specifies the Collation for the PostgreSQL Database, which needs to be a valid PostgreSQL Collation. Note that Microsoft uses different notation - en-US instead of en\_US. Changing this forces a new resource to be created. | `string` | `"nb-NO"` | no |
+| <a name="input_drop_cascade"></a> [drop\_cascade](#input\_drop\_cascade) | Whether to drop all the objects that are contained in a schema on deletion. | `bool` | `false` | no |
+| <a name="input_environment"></a> [environment](#input\_environment) | The environment name, e.g. 'dev' | `string` | n/a | yes |
+| <a name="input_geo_redundant_backup_enabled"></a> [geo\_redundant\_backup\_enabled](#input\_geo\_redundant\_backup\_enabled) | Enable Geo-redundant or not for server backup. Valid values for this property are Enabled or Disabled, not supported for the basic tier. | `bool` | `true` | no |
+| <a name="input_kubernetes_create_secret"></a> [kubernetes\_create\_secret](#input\_kubernetes\_create\_secret) | Whether to create a Kubernetes secret | `bool` | `true` | no |
+| <a name="input_kubernetes_namespaces"></a> [kubernetes\_namespaces](#input\_kubernetes\_namespaces) | The namespaces where a Kubernetes secret should be created | `list(string)` | `[]` | no |
+| <a name="input_kubernetes_secret_name"></a> [kubernetes\_secret\_name](#input\_kubernetes\_secret\_name) | The name of the Kubernetes secret to create | `string` | `null` | no |
+| <a name="input_landing_zone"></a> [landing\_zone](#input\_landing\_zone) | The landing zone name, e.g. 'dev-001' | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | Default Azure resource location | `string` | `"Norway East"` | no |
+| <a name="input_network_resource_group_prefix"></a> [network\_resource\_group\_prefix](#input\_network\_resource\_group\_prefix) | Name prefix of the network resource group | `string` | `"rg-networks"` | no |
+| <a name="input_postgresql_server_name"></a> [postgresql\_server\_name](#input\_postgresql\_server\_name) | Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. | `string` | `null` | no |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Whether or not public network access is allowed for this server. This should always be set to 'false'. | `bool` | `false` | no |
+| <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the PostgreSQL Server will be created. | `string` | n/a | yes |
+| <a name="input_server_configurations"></a> [server\_configurations](#input\_server\_configurations) | A map of PostgreSQL configurations to enable. | `map(string)` | `{}` | no |
+| <a name="input_server_version"></a> [server\_version](#input\_server\_version) | Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, and 10.0. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. GP\_Gen5\_8) - note: Basic tier (B) VMs are not supported. | `string` | n/a | yes |
+| <a name="input_storage_mb"></a> [storage\_mb](#input\_storage\_mb) | Max storage allowed for a server. Possible values are between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU and between 5120 MB(5GB) and 4194304 MB(4TB) for General Purpose/Memory Optimized SKUs. | `number` | `5120` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to attach to resources | `map(any)` | n/a | yes |
+| <a name="input_vnet_name_prefix"></a> [vnet\_name\_prefix](#input\_vnet\_name\_prefix) | Vnet name prefix where the nodes and pods will be deployed | `string` | `"vnet"` | no |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| <a name="output_administrator_login"></a> [administrator\_login](#output\_administrator\_login) | n/a |
+| <a name="output_administrator_login_password"></a> [administrator\_login\_password](#output\_administrator\_login\_password) | n/a |
+| <a name="output_application_login"></a> [application\_login](#output\_application\_login) | n/a |
+| <a name="output_application_login_password"></a> [application\_login\_password](#output\_application\_login\_password) | n/a |
+| <a name="output_custom_dns_configs"></a> [custom\_dns\_configs](#output\_custom\_dns\_configs) | n/a |
+| <a name="output_roles"></a> [roles](#output\_roles) | n/a |
+| <a name="output_server_fqdn"></a> [server\_fqdn](#output\_server\_fqdn) | n/a |
+| <a name="output_server_id"></a> [server\_id](#output\_server\_id) | n/a |
+| <a name="output_server_name"></a> [server\_name](#output\_server\_name) | n/a |
+<!-- END_TF_DOCS -->
