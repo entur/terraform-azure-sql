@@ -99,47 +99,6 @@ Public network access is denied, meaning the only way to connect to the database
 
 For instructions on how to connect securely from a local machine, please see internal Entur instructions.
 
-## Inputs
-
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| administrator_login | The administrator login for the PostgreSQL server | string | pgsqladminlocal | no |
-| app_name | The name of the associated application | string | N/A | yes |
-| resource_group_name | The name of the resource group in which the PostgreSQL Server will be created.| string |-| yes|
-| backup_retention_days | Backup retention days for the server | number | 14 | no |
-| databases | List of databases to create | list(string) | N/A | yes |
-| database_roles | Map of database roles and grants to create | map | N/A | yes |
-| db_charset | Specifies the charset for databases | string | UTF8 | no |
-| db_collation | Specifies the collation for databases | string | nb-NO | no |
-| drop_cascade | Whether to drop all the objects that are contained in a schema on deletion | bool | false | no |
-| environment | The environment name, e.g. 'dev' | string | N/A | yes |
-| kubernetes_create_secret | Whether to create Kubernetes secret(s) | bool | true | no |
-| kubernetes_namespaces | The namespace(s) where Kubernetes secret(s) should be created | list(string) | [] | no |
-| kubernetes_secret_name | The name of the Kubernetes secret(s) to create | string | Generated | no |
-| landing_zone | The landing zone name, e.g. 'dev-001' | string | N/A | yes |
-| location | Azure region where the cluster should be deployed | string | Norway East | no |
-| postgresql_server_name | Specifies the name of the PostgreSQL Server | string | Generated | no |
-| public_network_access_enabled | Whether to enable public network access | bool | false | no |
-| server_configurations | PostgreSQL configuration parameters | map(string) | N/A | no |
-| server_version | Specifies the version of PostgreSQL to use (e.g. "11")| string | N/A | yes |
-| sku_name | Specifies the SKU name for this PostgreSQL server ([more info](#database-instance-sizing)) | string | N/A | yes |
-| storage_mb | Max storage allowed for a server in megabytes (e.g. 5120) | number | N/A | yes |
-| tags | Tags to apply to created resources | map | N/A | yes |
-
-## Outputs
-
-| Name | Description |
-|------|-------------|
-| administrator_login | The server administrator login |
-| administrator_login_password | The server administrator password |
-| application_login | The application role login |
-| application_login_password | The application role password |
-| custom_dns_configs | Custom DNS configurations as exported by the private endpoint resource |
-| roles | All PostgreSQL roles provisioned by this module |
-| server_name | The server instance name |
-| server_id   | The server instance ID
-| server_fqdn | The server instance host |
-
 ### Example Kubernetes secret
 By default, secret names are prefixed with the application name specified in `var.app_name`, i.e. `<appname>-psql-credentials`. 
 
