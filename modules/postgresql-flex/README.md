@@ -135,7 +135,7 @@ This can be fixed by first deleting the admin password from the Terraform state,
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 2.53.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.0.3 |
-| <a name="requirement_postgresql"></a> [postgresql](#requirement\_postgresql) | 1.12.0 |
+| <a name="requirement_postgresql"></a> [postgresql](#requirement\_postgresql) | 1.17.1 |
 
 ## Providers
 
@@ -143,7 +143,7 @@ This can be fixed by first deleting the admin password from the Terraform state,
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 2.53.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.0.3 |
-| <a name="provider_postgresql"></a> [postgresql](#provider\_postgresql) | 1.12.0 |
+| <a name="provider_postgresql"></a> [postgresql](#provider\_postgresql) | 1.17.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
@@ -158,9 +158,9 @@ No modules.
 | [azurerm_postgresql_flexible_server_configuration.configs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_configuration) | resource |
 | [azurerm_postgresql_flexible_server_database.databases](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_database) | resource |
 | [kubernetes_secret.db_credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
-| [postgresql_grant.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/grant) | resource |
-| [postgresql_role.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/role) | resource |
-| [postgresql_schema.schemas](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/schema) | resource |
+| [postgresql_grant.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.17.1/docs/resources/grant) | resource |
+| [postgresql_role.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.17.1/docs/resources/role) | resource |
+| [postgresql_schema.schemas](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.17.1/docs/resources/schema) | resource |
 | [random_password.admin](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.roles](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [azurerm_private_dns_zone.dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
