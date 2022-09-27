@@ -21,5 +21,5 @@ module "postgresql-flexserver" {
   databases      = var.databases
   database_roles = var.database_roles
   
-  maintenance_window = var.maintenance_windows
+  maintenance_windows = var.maintenance_windows
 }
