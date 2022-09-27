@@ -61,6 +61,11 @@ resource "azurerm_postgresql_flexible_server" "main" {
   storage_mb             = var.storage_mb
   sku_name               = var.sku_name
   tags                   = var.tags
+  maintenance_window {
+    day_of_week  = var.maintenance_win_day_of_week
+    start_hour   = var.maintenance_win_start_hour
+    start_minute = var.maintenance_win_start_minute
+  }
   lifecycle {
     prevent_destroy = true
   }
