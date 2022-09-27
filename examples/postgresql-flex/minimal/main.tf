@@ -21,7 +21,5 @@ module "postgresql-flexserver" {
   databases      = var.databases
   database_roles = var.database_roles
   
-  maintenance_win_day_of_week  = var.maintenance_win_day_of_week
-  maintenance_win_start_hour   = var.maintenance_win_start_hour
-  maintenance_win_start_minute = var.maintenance_win_start_minute
+  maintenance_window = var.maintenance_windows
 }
