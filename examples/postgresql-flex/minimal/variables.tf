@@ -57,7 +57,7 @@ variable "database_roles" {
   }
 }
 
-variable "maintenance_windows" {
+variable "maintenance_window" {
   description = "Configure maintenance window day, start hour and start minute, default is Sunday= '0', hour= '0', minute= '0' "
   type        = map(string)
   default     = {
