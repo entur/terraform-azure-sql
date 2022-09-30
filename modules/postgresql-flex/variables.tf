@@ -163,4 +163,5 @@ variable "database_roles" {
 variable "maintenance_window" {
   description = "Configure maintenance window day, start hour and start minute"
   type        = map(string)
+  default     = null
 }
