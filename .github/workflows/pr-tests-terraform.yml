@@ -11,7 +11,8 @@ on:
 
 jobs:
   tf-tests:
-    uses: entur/gh-workflows/.github/workflows/pr-tests-terraform.yml@main
+    uses: entur/gh-workflows/.github/workflows/pr-tests-terraform.yml@tf-validate-dir-override
     with:
       module_dirs: '["./modules/postgresql", "./modules/postgresql-flex"]'
-      tf_version: 0.15.1
+      validate_dir_override: '["./modules/postgresql", "./examples/"]'
+      tf_version: 0.13.2
