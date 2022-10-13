@@ -10,5 +10,5 @@ jobs:
     uses: entur/gh-workflows/.github/workflows/pr-tests-terraform.yml@tf-validate-dir-override
     with:
       module_dirs: '["./modules/postgresql", "./modules/postgresql-flex"]'
-      validate_dir_override: '["./examples-postgresql/validate-test", "./examples/postgresql-flex/validate-test"]'
+      validate_dir_override: '["./examples/postgresql/validate-test", "./examples/postgresql-flex/validate-test"]'
       tf_version: 0.13.2
