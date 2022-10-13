@@ -1,18 +1,14 @@
 name: Call Terraform Tests, Docs & Compliance
 
 on:
-  pull_request:
+  push:
     branches:
-      - master
-    types:
-      - opened
-      - synchronize
-      - ready_for_review
+      - gh-action-validation-fix
 
 jobs:
   tf-tests:
     uses: entur/gh-workflows/.github/workflows/pr-tests-terraform.yml@tf-validate-dir-override
     with:
       module_dirs: '["./modules/postgresql", "./modules/postgresql-flex"]'
-      validate_dir_override: '["./modules/postgresql", "./examples/"]'
+      validate_dir_override: '["./modules/postgresql", "./examples/postgresql-flex/validate-test"]'
       tf_version: 0.13.2
