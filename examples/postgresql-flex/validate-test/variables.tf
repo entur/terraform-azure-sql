@@ -17,10 +17,12 @@ variable "location" {
   type    = string
   default = "Norway East"
 }
+
 variable "resource_group_name" {
   type    = string
   default = "validate"
 }
+
 variable "tags" {
   type    = map(any)
   default = {}
