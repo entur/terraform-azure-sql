@@ -10,7 +10,7 @@ variable "environment" {
 
 variable "landing_zone" {
   type    = string
-  default = "sandbox-001"
+  default = "landing"
 }
 
 variable "location" {
