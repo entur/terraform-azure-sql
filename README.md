@@ -16,7 +16,7 @@
 ### Example using the latest release of the Standard Server module
 ```
 module "postgresql" {
-  source = "github.com/entur/terraform-azure-sql//modules/postgresql?ref=v0.0.8"
+  source = "github.com/entur/terraform-azure-sql//modules/postgresql?ref=v0.1.0"
   ...
 }
 ```
