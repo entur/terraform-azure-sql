@@ -62,7 +62,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
   sku_name               = var.sku_name
   tags                   = var.tags
   lifecycle {
-    prevent_destroy = var.prevent_destroy
+    prevent_destroy = false
     ignore_changes = [
       zone
     ]
@@ -85,7 +85,7 @@ resource "azurerm_postgresql_flexible_server_database" "databases" {
   charset   = var.db_charset
   collation = var.db_collation
   lifecycle {
-    prevent_destroy = var.prevent_destroy
+    prevent_destroy = false
   }
 }
 
@@ -146,7 +146,7 @@ resource "postgresql_schema" "schemas" {
   ]
 
   lifecycle {
-    prevent_destroy = var.prevent_destroy
+    prevent_destroy = false
   }
 }
 

@@ -46,7 +46,7 @@ resource "azurerm_postgresql_server" "main" {
   tags                             = var.tags
 
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 }
 
@@ -75,7 +75,7 @@ resource "azurerm_postgresql_database" "databases" {
   collation           = var.db_collation
 
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 }
 
@@ -180,7 +180,7 @@ resource "postgresql_schema" "schemas" {
   ]
 
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 }
 
