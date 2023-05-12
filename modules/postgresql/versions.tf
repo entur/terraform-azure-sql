@@ -6,11 +6,11 @@ terraform {
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = ">= 2.0.3"
+      version = "~> 2.0"
     }
     postgresql = {
       source  = "cyrilgdn/postgresql"
-      version = "1.12.0"
+      version = "~> 1.19"
     }
   }
   required_version = ">= 0.13"
