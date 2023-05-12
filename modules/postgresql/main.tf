@@ -46,7 +46,7 @@ resource "azurerm_postgresql_server" "main" {
   tags                             = var.tags
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
