@@ -9,6 +9,12 @@ variable "resource_group_name" {
   type        = string
 }
 
+variable "prevent_destroy" {
+  description = "Prevent destruction of resources."
+  type        = bool
+  default     = true
+}
+
 variable "app_name" {
   description = "The name of the associated application"
   type        = string
