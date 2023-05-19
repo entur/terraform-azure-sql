@@ -80,7 +80,7 @@ variable "server_configurations" {
 
 ## Networking
 ### Connecting from an application
-Application-to-server communication use private network access via VNET integration, meaning it will communicate privately on a dedicated link from the Kubernetes cluster to the PostgreSQL server instance. Connection information (host) and role credentials (username and password) are provided in the [Kubernetes secret](#example-kubernetes-secret). 
+Application-to-server communication use private network access via VNET integration, meaning it will communicate privately on a dedicated link from the Kubernetes cluster to the PostgreSQL server instance. Connection information (host) and role credentials (username and password) are provided in the [Kubernetes secret](#example-kubernetes-secret).
 
 When mounting the entire Kubernetes secret to your Kubernetes deployment, an example Spring Boot `application.yml` configuration block could look like this:
 
@@ -100,7 +100,7 @@ Public network access is denied, meaning the only way to connect to the database
 For instructions on how to connect securely from a local machine, please see internal Entur instructions.
 
 ### Example Kubernetes secret
-By default, secret names are prefixed with the application name specified in `var.app_name`, i.e. `<appname>-psql-credentials`. 
+By default, secret names are prefixed with the application name specified in `var.app_name`, i.e. `<appname>-psql-credentials`.
 
 If `var.app_name` = `petshop`, it would produce a secret named `petshop-psql-credentials`.
 ```
@@ -116,7 +116,7 @@ kind: Secret
 ## Troubleshooting
 
 ### Administrator login password changed
-The server administrator password is generated and managed by Terraform, and is used by the PostgreSQL provider. If the password is changed outside Terraform, it will revoke Terraform's ability to refresh the state. 
+The server administrator password is generated and managed by Terraform, and is used by the PostgreSQL provider. If the password is changed outside Terraform, it will revoke Terraform's ability to refresh the state.
 
 This can be fixed by first deleting the admin password from the Terraform state, forcing it to be regenerated. Once it has been deleted, apply the new password on the server resource to regenerate and set a new password, using the [-target flag](https://www.terraform.io/docs/cli/commands/plan.html#resource-targeting).
 
@@ -133,17 +133,17 @@ This can be fixed by first deleting the admin password from the Terraform state,
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 2.53.0 |
-| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | >= 2.0.3 |
-| <a name="requirement_postgresql"></a> [postgresql](#requirement\_postgresql) | 1.12.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.0 |
+| <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.0 |
+| <a name="requirement_postgresql"></a> [postgresql](#requirement\_postgresql) | ~> 1.19 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 2.53.0 |
-| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | >= 2.0.3 |
-| <a name="provider_postgresql"></a> [postgresql](#provider\_postgresql) | 1.12.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.0 |
+| <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 2.0 |
+| <a name="provider_postgresql"></a> [postgresql](#provider\_postgresql) | ~> 1.19 |
 | <a name="provider_random"></a> [random](#provider\_random) | n/a |
 
 ## Modules
@@ -158,9 +158,9 @@ No modules.
 | [azurerm_postgresql_flexible_server_configuration.configs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_configuration) | resource |
 | [azurerm_postgresql_flexible_server_database.databases](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_database) | resource |
 | [kubernetes_secret.db_credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
-| [postgresql_grant.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/grant) | resource |
-| [postgresql_role.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/role) | resource |
-| [postgresql_schema.schemas](https://registry.terraform.io/providers/cyrilgdn/postgresql/1.12.0/docs/resources/schema) | resource |
+| [postgresql_grant.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
+| [postgresql_role.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/role) | resource |
+| [postgresql_schema.schemas](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/schema) | resource |
 | [random_password.admin](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.roles](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [azurerm_private_dns_zone.dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
