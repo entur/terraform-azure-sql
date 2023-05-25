@@ -108,12 +108,6 @@ variable "db_collation" {
   default     = "nb_NO.utf8"
 }
 
-variable "public_network_access_enabled" {
-  description = "Whether or not public network access is allowed for this server. This should always be set to 'false'."
-  type        = bool
-  default     = false
-}
-
 variable "drop_cascade" {
   description = "Whether to drop all the objects that are contained in a schema on deletion."
   type        = bool
@@ -158,4 +152,10 @@ variable "database_roles" {
       ]
     }
   }
+}
+
+variable "maintenance_window" {
+  description = "Configure maintenance window day, start hour and start minute"
+  type        = map(string)
+  default     = null
 }

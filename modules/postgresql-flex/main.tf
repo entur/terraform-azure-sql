@@ -61,6 +61,14 @@ resource "azurerm_postgresql_flexible_server" "main" {
   storage_mb             = var.storage_mb
   sku_name               = var.sku_name
   tags                   = var.tags
+  dynamic "maintenance_window" {
+    for_each = var.maintenance_window == null ? tolist([]) : list(var.maintenance_window)
+      content {
+        day_of_week  = maintenance_window.value.day_of_week
+        start_hour   = maintenance_window.value.start_hour
+        start_minute = maintenance_window.value.start_minute
+      }
+  }
   lifecycle {
     prevent_destroy = true
     ignore_changes = [

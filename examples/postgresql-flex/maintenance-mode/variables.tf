@@ -5,12 +5,12 @@ variable "app_name" {
 
 variable "environment" {
   type    = string
-  default = "myenv"
+  default = "sandbox"
 }
 
 variable "landing_zone" {
   type    = string
-  default = "mylandingzone"
+  default = "sandbox-001"
 }
 
 variable "location" {
@@ -19,7 +19,7 @@ variable "location" {
 }
 variable "resource_group_name" {
   type    = string
-  default = "myapprg"
+  default = "rg-app-x-x"
 }
 variable "tags" {
   type    = map(any)
@@ -61,8 +61,8 @@ variable "maintenance_window" {
   description = "Configure maintenance window day, start hour and start minute, default is Sunday= '0', hour= '0', minute= '0' "
   type        = map(string)
   default     = {
-    day_of_week  = 5
-    start_hour   = 22
-    start_minute = 0
+    day_of_week  = 4
+    start_hour   = 23
+    start_minute = 1
   }
 }
