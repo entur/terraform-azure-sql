@@ -8,16 +8,20 @@ Creates a managed PostgreSQL flexible server instance on Azure.
 * Provisions a Kubernetes secret containing application role credentials
 
 ## Prerequisites
+
 * A preprovisioned landing zone subnet and private DNS zone (in Entur, these have been provided for you)
 
 ## Getting started
+
 For example configurations, see the [included examples](../../examples).
 
 ### Adding databases
+
 To add databases, supply a list of database names. Charset and collation settings can be overridden using variables described in the list of [inputs](#inputs).
 
 #### Example
-```
+
+```terraform
 variable "databases" {
   type        = list(string)
   default     = ["mydatabase", "anotherdatabase"]
@@ -25,6 +29,7 @@ variable "databases" {
 ```
 
 ### Adding roles and grants
+
 To add a role, supply a map containing role names and associated grants.
 
 * Grants can only be applied to existing databases. Make sure you have added them to the [list of databases](#adding-databases).
@@ -36,7 +41,8 @@ For grants, the following [object types](https://registry.terraform.io/providers
 Passwords are auto-generated. Database schemas that don't exist will be created automatically.
 
 #### Example
-```
+
+```terraform
 variable "database_roles" {
   type    = map
   default = {
@@ -65,10 +71,12 @@ variable "database_roles" {
 ```
 
 ### PostgreSQL configuration parameters
+
 Custom configuration parameters can be applied by supplying a map of strings.
 
 #### Example
-```
+
+```terraform
 variable "server_configurations" {
   type        = map(string)
   default     = {
@@ -79,12 +87,14 @@ variable "server_configurations" {
 ```
 
 ## Networking
+
 ### Connecting from an application
+
 Application-to-server communication use private network access via VNET integration, meaning it will communicate privately on a dedicated link from the Kubernetes cluster to the PostgreSQL server instance. Connection information (host) and role credentials (username and password) are provided in the [Kubernetes secret](#example-kubernetes-secret).
 
 When mounting the entire Kubernetes secret to your Kubernetes deployment, an example Spring Boot `application.yml` configuration block could look like this:
 
-```
+```terraform
 spring:
   datasource:
     url: jdbc:postgresql://${PGHOST}:5432/mydatabase
@@ -95,15 +105,18 @@ spring:
 The application container can communicate directly with the server instance using TLS, and it does not require a sidecar.
 
 ### Connecting from a local machine
+
 Public network access is denied, meaning the only way to connect to the database is through the private endpoint.
 
 For instructions on how to connect securely from a local machine, please see internal Entur instructions.
 
 ### Example Kubernetes secret
+
 By default, secret names are prefixed with the application name specified in `var.app_name`, i.e. `<appname>-psql-credentials`.
 
 If `var.app_name` = `petshop`, it would produce a secret named `petshop-psql-credentials`.
-```
+
+```terraform
 apiVersion: v1
 data:
   PGHOST: ...
@@ -116,6 +129,7 @@ kind: Secret
 ## Troubleshooting
 
 ### Administrator login password changed
+
 The server administrator password is generated and managed by Terraform, and is used by the PostgreSQL provider. If the password is changed outside Terraform, it will revoke Terraform's ability to refresh the state.
 
 This can be fixed by first deleting the admin password from the Terraform state, forcing it to be regenerated. Once it has been deleted, apply the new password on the server resource to regenerate and set a new password, using the [-target flag](https://www.terraform.io/docs/cli/commands/plan.html#resource-targeting).
@@ -123,6 +137,7 @@ This can be fixed by first deleting the admin password from the Terraform state,
 **Use with caution**.
 
 #### Example
+
 `terraform state rm module.postgresql.random_password.admin`
 
 `terraform apply -target=module.postgresql.azurerm_postgresql_server.main`
@@ -213,3 +228,5 @@ No modules.
 | <a name="output_server_id"></a> [server\_id](#output\_server\_id) | n/a |
 | <a name="output_server_name"></a> [server\_name](#output\_server\_name) | n/a |
 <!-- END_TF_DOCS -->
+<!-- markdown settings -->
+<!-- markdownlint-configure-file { "MD024": false, "MD033": false, "MD030": false} -->
