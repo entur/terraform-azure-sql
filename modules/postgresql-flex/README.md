@@ -151,6 +151,7 @@ This can be fixed by first deleting the admin password from the Terraform state,
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.0 |
 | <a name="requirement_postgresql"></a> [postgresql](#requirement\_postgresql) | ~> 1.19 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.5.1 |
 
 ## Providers
 
@@ -159,7 +160,7 @@ This can be fixed by first deleting the admin password from the Terraform state,
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 2.0 |
 | <a name="provider_postgresql"></a> [postgresql](#provider\_postgresql) | ~> 1.19 |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.5.1 |
 
 ## Modules
 
@@ -199,13 +200,10 @@ No modules.
 | <a name="input_kubernetes_secret_name"></a> [kubernetes\_secret\_name](#input\_kubernetes\_secret\_name) | The name of the Kubernetes secret to create | `string` | `null` | no |
 | <a name="input_landing_zone"></a> [landing\_zone](#input\_landing\_zone) | The landing zone name, e.g. 'dev-001' | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | Default Azure resource location | `string` | `"Norway East"` | no |
-| <a name="input_maintenance_win_day_of_week"></a> [maintenance\_win\_day\_of\_week](#input\_maintenance\_win\_day\_of\_week) | The day of week for maintenance window, where the week starts on a Sunday, i.e. Sunday = 0, Monday = 1. Defaults to 0. | `string` | `"0"` | no |
-| <a name="input_maintenance_win_start_hour"></a> [maintenance\_win\_start\_hour](#input\_maintenance\_win\_start\_hour) | The start hour for maintenance window. Defaults to 0. | `string` | `"0"` | no |
-| <a name="input_maintenance_win_start_minute"></a> [maintenance\_win\_start\_minute](#input\_maintenance\_win\_start\_minute) | The start minute for maintenance window. Defaults to 0. | `string` | `"0"` | no |
+| <a name="input_maintenance_window"></a> [maintenance\_window](#input\_maintenance\_window) | Configure maintenance window day, start hour and start minute | `map(string)` | `null` | no |
 | <a name="input_network_resource_group_prefix"></a> [network\_resource\_group\_prefix](#input\_network\_resource\_group\_prefix) | Name prefix of the network resource group | `string` | `"rg-networks"` | no |
 | <a name="input_postgresql_server_name"></a> [postgresql\_server\_name](#input\_postgresql\_server\_name) | Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. | `string` | `null` | no |
 | <a name="input_psql_connections_subnet_name_prefix"></a> [psql\_connections\_subnet\_name\_prefix](#input\_psql\_connections\_subnet\_name\_prefix) | Subnet name prefix of subnets where Azure private endpoint connections will be created | `string` | `"snet-psqlflex-workloads"` | no |
-| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Whether or not public network access is allowed for this server. This should always be set to 'false'. | `bool` | `false` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the PostgreSQL Server will be created. | `string` | n/a | yes |
 | <a name="input_server_configurations"></a> [server\_configurations](#input\_server\_configurations) | A map of PostgreSQL configurations to enable. | `map(string)` | `{}` | no |
 | <a name="input_server_version"></a> [server\_version](#input\_server\_version) | Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, and 10.0. Changing this forces a new resource to be created. | `string` | n/a | yes |
