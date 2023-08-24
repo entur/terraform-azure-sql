@@ -1,11 +1,10 @@
 name: Terraform Integration Tests
 
 on:
-  push:
+  pull_request:
     paths:
       - 'modules/postgresql-flex/**'
       - 'test/**'
-  pull_request:
     branches:
       - master
     types:
@@ -21,6 +20,8 @@ jobs:
       id-token: 'write'
 
     name: Integration test Azure Postgresql module
+    environment:
+      name: Nonprod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
