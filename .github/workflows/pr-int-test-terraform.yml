@@ -20,8 +20,6 @@ jobs:
       id-token: 'write'
 
     name: Integration test Azure Postgresql module
-    environment:
-      name: Nonprod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
