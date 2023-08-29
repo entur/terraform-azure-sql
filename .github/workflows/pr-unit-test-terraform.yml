@@ -1,4 +1,4 @@
-name: Terraform Integration Tests
+name: Terraform Unit Tests
 
 on:
   pull_request:

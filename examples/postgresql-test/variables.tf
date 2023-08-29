@@ -1,16 +1,16 @@
 variable "app_name" {
   type    = string
-  default = "myapp"
+  default = "tfmodules"
 }
 
 variable "environment" {
   type    = string
-  default = "myenv"
+  default = "dev"
 }
 
 variable "landing_zone" {
   type    = string
-  default = "mylandingzone"
+  default = "dev-001"
 }
 
 variable "location" {
@@ -19,7 +19,7 @@ variable "location" {
 }
 variable "resource_group_name" {
   type    = string
-  default = "myapprg"
+  default = "rg-app-tfmodules-dev"
 }
 variable "tags" {
   type    = map(any)
@@ -28,27 +28,27 @@ variable "tags" {
 
 variable "databases" {
   type    = list(string)
-  default = ["cats", "dogs"]
+  default = ["database-1", "database-2"]
 }
 
 variable "database_roles" {
   type = map(any)
   default = {
     application = {
-      name              = "appuser"
+      name              = "tfmodules"
       password_override = null
       replication       = false
       roles             = []
       grants = [
         {
-          database    = "cats"
-          schema      = "cats"
+          database    = "database-1"
+          schema      = "user1"
           object_type = "database"
           privileges  = ["CONNECT"]
         },
         {
-          database    = "dogs"
-          schema      = "dogs"
+          database    = "database-2"
+          schema      = "user2"
           object_type = "database"
           privileges  = ["CONNECT"]
         }
