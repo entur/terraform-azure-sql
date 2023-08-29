@@ -1,6 +1,6 @@
 module github.com/entur/terraform-azure-sql
 
-go 1.23.0
+go 1.21.0
 
 require github.com/gruntwork-io/terratest v0.43.13
 
