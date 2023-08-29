@@ -1,0 +1,43 @@
+name: Terraform Unit Tests
+
+on:
+  pull_request:
+    paths:
+      - 'modules/postgresql-flex/**'
+      - 'test/**'
+    branches:
+      - master
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
+  workflow_dispatch:
+
+jobs:
+  test_postgresql:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    name: Integration test Azure Postgresql module
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+      - uses: Azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        - uses: hashicorp/setup-terraform@v2
+          with:
+            terraform_version: 0.15.1
+            terraform_wrapper: false
+        - name: Download Go Modules
+          working-directory: test/unit
+          run: go mod download
+        - name: Run Go Unit Tests
+          working-directory: test/unit
+          run: go test -tags=unit -timeout 30m
