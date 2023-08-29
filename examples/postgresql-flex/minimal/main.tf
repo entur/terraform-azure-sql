@@ -20,6 +20,6 @@ module "postgresql-flexserver" {
 
   databases      = var.databases
   database_roles = var.database_roles
-  
+
   maintenance_window = var.maintenance_window #You can remove this line if you want to keep the maintenance_window setup as default.
 }
