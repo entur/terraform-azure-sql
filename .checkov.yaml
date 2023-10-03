@@ -1,0 +1,11 @@
+directory:
+  - modules/postgresql
+  - modules/postgresql-flex
+  - examples/postgresql-test
+  - examples/postgresql-flex/minimal
+download-external-modules: true 
+framework:
+  - terraform
+skip-check: 
+  - CKV_AZURE_128
+  - CKV_AZURE_130
