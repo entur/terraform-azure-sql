@@ -1,0 +1,4 @@
+skip-check:
+  - CKV_AZURE_128  # Skipped - Non-Flexible DB type will be deprecated
+  - CKV_AZURE_130  # Skipped - Non-Flexible DB type will be deprecated and not supported by Microsoft.
+  - CKV_AZURE_136  # Skipped - Using global disaster recovery backup
