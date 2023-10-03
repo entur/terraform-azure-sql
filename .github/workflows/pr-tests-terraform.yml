@@ -16,5 +16,5 @@ jobs:
   tf-tests:
     uses: entur/gh-workflows/.github/workflows/pr-tests-terraform.yml@main
     with:
-      module_dirs: '["./modules/postgresql", "./modules/postgresql-flex"]'
+      module_dirs: '["./modules/postgresql", "./modules/postgresql-flex", "./.github/workflows"]'
       tf_version: 0.15.1
