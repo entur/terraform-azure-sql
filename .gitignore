@@ -33,3 +33,4 @@ tfplan
 
 # Terraform lock files
 .terraform.lock.hcl
+results.sarif
