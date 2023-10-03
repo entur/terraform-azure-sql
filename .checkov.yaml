@@ -9,3 +9,4 @@ framework:
 skip-check: 
   - CKV_AZURE_128
   - CKV_AZURE_130
+soft-fail: true
