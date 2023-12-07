@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 module "postgresql-flexserver" {
-  source = "github.com/entur/terraform-azure-sql//modules/postgresql-flex?ref=v0.1.0" # Releases: https://github.com/entur/terraform-azure-sql/releases (x-release-please-version)
+  source = "github.com/entur/terraform-azure-sql//modules/postgresql-flex?ref=v0.2.0" # Releases: https://github.com/entur/terraform-azure-sql/releases (x-release-please-version)
   # source = "../../../modules/postgresql-flex"
 
   resource_group_name = var.resource_group_name
