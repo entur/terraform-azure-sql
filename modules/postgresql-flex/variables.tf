@@ -55,10 +55,10 @@ variable "vnet_name_prefix" {
   default     = "vnet"
 }
 
-variable "psql_connections_subnet_name_prefix" {
+variable "aks_connections_subnet_name_prefix" {
   description = "Subnet name prefix of subnets where Azure private endpoint connections will be created"
   type        = string
-  default     = "snet-psqlflex-workloads"
+  default     = "snet-aks-connections"
 }
 
 variable "network_resource_group_prefix" {
