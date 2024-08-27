@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 module "postgresql-flexserver" {
-  source = "github.com/entur/terraform-azure-sql//modules/postgresql-flex?ref=v0.2.0" # Releases: https://github.com/entur/terraform-azure-sql/releases (x-release-please-version)
+  source = "github.com/entur/terraform-azure-sql//modules/postgresql-flex?ref=v1.0.0" # Releases: https://github.com/entur/terraform-azure-sql/releases (x-release-please-version)
   # source = "../../../modules/postgresql-flex"
 
   resource_group_name = var.resource_group_name
@@ -14,7 +14,7 @@ module "postgresql-flexserver" {
   environment  = var.environment
   landing_zone = var.landing_zone
 
-  server_version = "12"
+  server_version = "16"
   sku_name       = "GP_Standard_D4s_v3"
   storage_mb     = 32768
 
