@@ -92,7 +92,7 @@ variable "backup_retention_days" {
 }
 
 variable "server_version" {
-  description = "Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, and 10.0. Changing this forces a new resource to be created."
+  description = "Specifies the version of PostgreSQL to use. Changing this forces a new resource to be created."
   type        = string
 }
 
