@@ -33,13 +33,6 @@ data "azurerm_private_dns_zone" "dns_zone" {
   resource_group_name = "${var.network_resource_group_prefix}-${var.landing_zone}"
 }
 
-# Fetch subnet designated to PostgreSQL flexible server connections
-data "azurerm_subnet" "psqlflex" {
-  name                 = "${var.psql_connections_subnet_name_prefix}-${var.landing_zone}"
-  virtual_network_name = "${var.vnet_name_prefix}-${var.landing_zone}"
-  resource_group_name  = "${var.network_resource_group_prefix}-${var.landing_zone}"
-}
-
 # Generate admin role password
 resource "random_password" "admin" {
   length           = 64
@@ -53,8 +46,6 @@ resource "azurerm_postgresql_flexible_server" "main" {
   resource_group_name    = var.resource_group_name
   location               = var.location
   version                = var.server_version
-  delegated_subnet_id    = data.azurerm_subnet.psqlflex.id
-  private_dns_zone_id    = data.azurerm_private_dns_zone.dns_zone.id
   administrator_login    = var.administrator_login
   administrator_password = random_password.admin.result
   backup_retention_days  = var.backup_retention_days
@@ -62,7 +53,7 @@ resource "azurerm_postgresql_flexible_server" "main" {
   sku_name               = var.sku_name
   tags                   = var.tags
   dynamic "maintenance_window" {
-    for_each = var.maintenance_window == null ? tolist([]) : list(var.maintenance_window)
+    for_each = var.maintenance_window == null ? tolist([]) : [var.maintenance_window]
     content {
       day_of_week  = maintenance_window.value.day_of_week
       start_hour   = maintenance_window.value.start_hour
@@ -75,6 +66,36 @@ resource "azurerm_postgresql_flexible_server" "main" {
       zone
     ]
   }
+}
+
+# network - private endpoint connection
+data "azurerm_subnet" "aks_connections" {
+  name                 = "${var.aks_connections_subnet_name_prefix}-${var.landing_zone}"
+  virtual_network_name = "${var.vnet_name_prefix}-${var.landing_zone}"
+  resource_group_name  = "${var.network_resource_group_prefix}-${var.landing_zone}"
+}
+
+resource "azurerm_private_endpoint" "aks_connections" {
+  name                = "pe-aks-${azurerm_postgresql_flexible_server.main.name}"
+  location            = var.location
+  resource_group_name = data.azurerm_subnet.aks_connections.resource_group_name
+  subnet_id           = data.azurerm_subnet.aks_connections.id
+
+  private_service_connection {
+    name                           = "pec-aks-${azurerm_postgresql_flexible_server.main.name}"
+    private_connection_resource_id = azurerm_postgresql_flexible_server.main.id
+    subresource_names              = ["postgresqlServer"]
+    is_manual_connection           = false
+  }
+}
+
+# Create a private DNS record for use with private endpoint connection
+resource "azurerm_private_dns_a_record" "privatelink" {
+  name                = azurerm_postgresql_flexible_server.main.name
+  resource_group_name = data.azurerm_subnet.aks_connections.resource_group_name
+  zone_name           = "privatelink.postgres.database.azure.com"
+  ttl                 = 60
+  records             = azurerm_private_endpoint.aks_connections.custom_dns_configs[0].ip_addresses
 }
 
 # Generate role passwords

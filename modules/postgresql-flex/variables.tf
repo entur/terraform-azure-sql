@@ -55,10 +55,10 @@ variable "vnet_name_prefix" {
   default     = "vnet"
 }
 
-variable "psql_connections_subnet_name_prefix" {
+variable "aks_connections_subnet_name_prefix" {
   description = "Subnet name prefix of subnets where Azure private endpoint connections will be created"
   type        = string
-  default     = "snet-psqlflex-workloads"
+  default     = "snet-aks-connections"
 }
 
 variable "network_resource_group_prefix" {
@@ -75,7 +75,7 @@ variable "postgresql_server_name" {
 }
 
 variable "sku_name" {
-  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. GP_Gen5_8) - note: Basic tier (B) VMs are not supported."
+  description = "Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. GP_Gen5_8) - note: Basic tier (B) VMs are not supported. Refer to https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-compute#compute-tiers-vcores-and-server-types"
   type        = string
 }
 
@@ -92,7 +92,7 @@ variable "backup_retention_days" {
 }
 
 variable "server_version" {
-  description = "Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, and 10.0. Changing this forces a new resource to be created."
+  description = "Specifies the version of PostgreSQL to use. Changing this forces a new resource to be created."
   type        = string
 }
 

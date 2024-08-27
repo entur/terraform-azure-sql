@@ -173,6 +173,8 @@ No modules.
 | [azurerm_postgresql_flexible_server.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server) | resource |
 | [azurerm_postgresql_flexible_server_configuration.configs](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_configuration) | resource |
 | [azurerm_postgresql_flexible_server_database.databases](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/postgresql_flexible_server_database) | resource |
+| [azurerm_private_dns_a_record.privatelink](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_dns_a_record) | resource |
+| [azurerm_private_endpoint.aks_connections](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/private_endpoint) | resource |
 | [kubernetes_secret.db_credentials](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/secret) | resource |
 | [postgresql_grant.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/grant) | resource |
 | [postgresql_role.roles](https://registry.terraform.io/providers/cyrilgdn/postgresql/latest/docs/resources/role) | resource |
@@ -180,13 +182,14 @@ No modules.
 | [random_password.admin](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [random_password.roles](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
 | [azurerm_private_dns_zone.dns_zone](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/private_dns_zone) | data source |
-| [azurerm_subnet.psqlflex](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subnet) | data source |
+| [azurerm_subnet.aks_connections](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subnet) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_administrator_login"></a> [administrator\_login](#input\_administrator\_login) | The administrator login for the PostgreSQL Server. | `string` | `"pgsqladminlocal"` | no |
+| <a name="input_aks_connections_subnet_name_prefix"></a> [aks\_connections\_subnet\_name\_prefix](#input\_aks\_connections\_subnet\_name\_prefix) | Subnet name prefix of subnets where Azure private endpoint connections will be created | `string` | `"snet-aks-connections"` | no |
 | <a name="input_app_name"></a> [app\_name](#input\_app\_name) | The name of the associated application | `string` | n/a | yes |
 | <a name="input_backup_retention_days"></a> [backup\_retention\_days](#input\_backup\_retention\_days) | Backup retention days for the server, supported values are between 7 and 35 days. | `number` | `14` | no |
 | <a name="input_database_roles"></a> [database\_roles](#input\_database\_roles) | Map of database roles and grants. | `map(any)` | <pre>{<br>  "application": {<br>    "grants": [<br>      {<br>        "database": "application",<br>        "object_type": "database",<br>        "privileges": [<br>          "CONNECT",<br>          "TEMPORARY"<br>        ],<br>        "schema": "public"<br>      }<br>    ],<br>    "name": "appuser",<br>    "password_override": null,<br>    "replication": false,<br>    "roles": []<br>  }<br>}</pre> | no |
@@ -203,11 +206,10 @@ No modules.
 | <a name="input_maintenance_window"></a> [maintenance\_window](#input\_maintenance\_window) | Configure maintenance window day, start hour and start minute | `map(string)` | `null` | no |
 | <a name="input_network_resource_group_prefix"></a> [network\_resource\_group\_prefix](#input\_network\_resource\_group\_prefix) | Name prefix of the network resource group | `string` | `"rg-networks"` | no |
 | <a name="input_postgresql_server_name"></a> [postgresql\_server\_name](#input\_postgresql\_server\_name) | Specifies the name of the PostgreSQL Server. Changing this forces a new resource to be created. | `string` | `null` | no |
-| <a name="input_psql_connections_subnet_name_prefix"></a> [psql\_connections\_subnet\_name\_prefix](#input\_psql\_connections\_subnet\_name\_prefix) | Subnet name prefix of subnets where Azure private endpoint connections will be created | `string` | `"snet-psqlflex-workloads"` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The name of the resource group in which the PostgreSQL Server will be created. | `string` | n/a | yes |
 | <a name="input_server_configurations"></a> [server\_configurations](#input\_server\_configurations) | A map of PostgreSQL configurations to enable. | `map(string)` | `{}` | no |
-| <a name="input_server_version"></a> [server\_version](#input\_server\_version) | Specifies the version of PostgreSQL to use. Valid values are 9.5, 9.6, and 10.0. Changing this forces a new resource to be created. | `string` | n/a | yes |
-| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. GP\_Gen5\_8) - note: Basic tier (B) VMs are not supported. | `string` | n/a | yes |
+| <a name="input_server_version"></a> [server\_version](#input\_server\_version) | Specifies the version of PostgreSQL to use. Changing this forces a new resource to be created. | `string` | n/a | yes |
+| <a name="input_sku_name"></a> [sku\_name](#input\_sku\_name) | Specifies the SKU Name for this PostgreSQL Server. The name of the SKU, follows the tier + family + cores pattern (e.g. GP\_Gen5\_8) - note: Basic tier (B) VMs are not supported. Refer to https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-compute#compute-tiers-vcores-and-server-types | `string` | n/a | yes |
 | <a name="input_storage_mb"></a> [storage\_mb](#input\_storage\_mb) | Max storage allowed for a server. Possible values are between 5120 MB(5GB) and 1048576 MB(1TB) for the Basic SKU and between 5120 MB(5GB) and 4194304 MB(4TB) for General Purpose/Memory Optimized SKUs. | `number` | `32768` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to attach to resources | `map(any)` | n/a | yes |
 | <a name="input_vnet_name_prefix"></a> [vnet\_name\_prefix](#input\_vnet\_name\_prefix) | Vnet name prefix where the nodes and pods will be deployed | `string` | `"vnet"` | no |
