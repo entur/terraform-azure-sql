@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.0](https://github.com/entur/terraform-azure-sql/compare/v0.2.0...v1.0.0) (2024-08-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* psql flex now uses public network with private endpoint ([#40](https://github.com/entur/terraform-azure-sql/issues/40))
+
+### Features
+
+* psql flex now uses public network with private endpoint ([#40](https://github.com/entur/terraform-azure-sql/issues/40)) ([478291a](https://github.com/entur/terraform-azure-sql/commit/478291aeb31c06050d0693e555ce88150a5bd3ca))
+
 ## [0.2.0](https://github.com/entur/terraform-azure-sql/compare/v0.1.1...v0.2.0) (2023-12-07)
 
 
