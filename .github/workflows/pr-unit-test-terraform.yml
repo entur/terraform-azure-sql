@@ -3,10 +3,10 @@ name: Terraform Unit Tests
 on:
   pull_request:
     paths:
-      - 'modules/postgresql-flex/**'
-      - 'test/**'
+      - "modules/postgresql-flex/**"
+      - "test/**"
     branches:
-      - master
+      - main
     types:
       - opened
       - synchronize
@@ -16,8 +16,8 @@ on:
 jobs:
   test_postgresql:
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: "read"
+      id-token: "write"
 
     name: Integration test Azure Postgresql module
     runs-on: ubuntu-latest

@@ -1,21 +1,18 @@
 name: Call Terraform Tests, Docs & Compliance
 
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  # This will run the tests twice, one in the PR and one when Commiting to master.
-  #  -> making sure the results appear in the "Security/Code Scan" tab in github.
-  push:
-    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "main", "master" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  tf-tests:
-    uses: entur/gh-workflows/.github/workflows/pr-tests-terraform.yml@main
+  tf-lint:
+    name: Terraform Lint
+    uses: entur/gha-terraform/.github/workflows/lint.yml@v2
     with:
-      module_dirs: '["./modules/postgresql", "./modules/postgresql-flex"]'
-      tf_version: 0.15.1
-
+      directory: "/modules/postgresql-flex"
+  tf-lint2:
+    name: Terraform Lint
+    uses: entur/gha-terraform/.github/workflows/lint.yml@v2
+    with:
+      directory: "/modules/postgresql"
