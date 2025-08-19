@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/entur/terraform-azure-sql/compare/v1.0.0...v1.0.1) (2025-08-19)
+
+
+### Bug Fixes
+
+* [skip ci] common dependabot config, rename master to main, remove renovate checkov, add codeql scan ([#44](https://github.com/entur/terraform-azure-sql/issues/44)) ([cd9c208](https://github.com/entur/terraform-azure-sql/commit/cd9c2081bb6d94486343091c7f0001b16d3a490c))
+
 ## [1.0.0](https://github.com/entur/terraform-azure-sql/compare/v0.2.0...v1.0.0) (2024-08-27)
 
 
