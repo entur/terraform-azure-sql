@@ -9,7 +9,6 @@ on:
       - edited
 
 jobs:
-  validate-pr:
-    uses: entur/gh-workflows/.github/workflows/pr-validation.yml@main
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
+  verify-pr:
+    if: ${{ github.event_name == 'pull_request' }}
+    uses: entur/gha-meta/.github/workflows/verify-pr.yml@v1

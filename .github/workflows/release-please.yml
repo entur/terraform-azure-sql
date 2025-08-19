@@ -6,12 +6,7 @@ on:
       - main
 
 jobs:
-  tf-tests:
-    uses: entur/gh-workflows/.github/workflows/release-please.yml@main
+  release:
+    uses: entur/gha-meta/.github/workflows/release.yml@v1
     with:
       release_type: terraform-module
-      version_bumped_files: |
-        README.md
-        examples/postgresql/minimal/main.tf
-        examples/postgresql/features/main.tf
-        examples/postgresql-flex/minimal/main.tf
