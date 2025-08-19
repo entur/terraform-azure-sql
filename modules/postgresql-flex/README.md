@@ -148,7 +148,7 @@ This can be fixed by first deleting the admin password from the Terraform state,
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.0 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 4.0 |
 | <a name="requirement_kubernetes"></a> [kubernetes](#requirement\_kubernetes) | ~> 2.0 |
 | <a name="requirement_postgresql"></a> [postgresql](#requirement\_postgresql) | ~> 1.19 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6.0 |
@@ -157,7 +157,7 @@ This can be fixed by first deleting the admin password from the Terraform state,
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 3.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | ~> 4.0 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | ~> 2.0 |
 | <a name="provider_postgresql"></a> [postgresql](#provider\_postgresql) | ~> 1.19 |
 | <a name="provider_random"></a> [random](#provider\_random) | ~> 3.6.0 |
