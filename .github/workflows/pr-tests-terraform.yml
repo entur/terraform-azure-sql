@@ -10,8 +10,14 @@ on:
       - ready_for_review
 
 jobs:
-  tf-tests:
-    uses: entur/gh-workflows/.github/workflows/pr-tests-terraform.yml@main
+  tf-lint-postgresql:
+    name: Terraform Lint
+    uses: entur/gha-terraform/.github/workflows/lint.yml@v2
     with:
-      module_dirs: '["./modules/postgresql", "./modules/postgresql-flex"]'
-      tf_version: 0.15.1
+      directory: ./modules/postgresql
+
+  tf-lint-flex:
+    name: Terraform Lint
+    uses: entur/gha-terraform/.github/workflows/lint.yml@v2
+    with:
+      directory: ./modules/postgresql-flex
